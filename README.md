@@ -1,9 +1,9 @@
-📊 Stock Analysis and Prediction Application
+**📊 Stock Analysis and Prediction Application**
 A comprehensive Django-based web application that provides a platform for stock analysis, prediction, and financial data visualization. The application integrates with Yahoo Finance (yFinance) to fetch real-time stock data and uses machine learning models to predict future stock prices.
 
-🌟 Features
-User Authentication:
-
+**🌟 Features**
+**User Authentication:
+**
 Secure login, registration, and logout functionalities.
 Decorators ensure authenticated users access sensitive data and pages.
 Error handling and user feedback via Django messages.
@@ -39,3 +39,33 @@ Database: SQLite (default for Django)
 Authentication: Django's built-in authentication system
 Forms and Validation: Django Forms
 Feedback Handling: Django Models and Forms
+🚀 Getting Started
+Clone the repository:
+
+
+git clone https://github.com/yourusername/stock-analysis-prediction.git
+cd stock-analysis-prediction
+Install Dependencies: Make sure you have Python 3 and pip installed. Then run:
+
+
+pip install -r requirements.txt
+Run Migrations:
+
+
+python manage.py makemigrations
+python manage.py migrate
+Create a Superuser:
+
+python manage.py createsuperuser
+Run the Development Server:
+
+python manage.py runserver
+Visit http://127.0.0.1:8000/ to access the application.
+
+
+🤝 Contributing
+We welcome contributions! Feel free to fork this repository and submit a pull request. Ensure your code follows PEP 8 guidelines and is well-documented.
+
+📜 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
