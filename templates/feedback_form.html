@@ -1,0 +1,741 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{{stock.shortName}} </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href=" {% static 'assets/img/cloud-computing-icon.png' %}  " rel="icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.2/css/boxicons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <!-- Favicons -->
+  <link href=" {% static 'assets/img/apple-touch-icon.png' %} " rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<style>
+
+/* Global Settings */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+
+/* Main Content Adjustment */
+.main {
+    margin-left: 250px; /* Adjust based on sidebar width */
+    padding: 20px;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+    }
+    .main {
+        margin-left: 0;
+    }
+}
+
+/* Card & Table Styling */
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.card-body {
+    padding: 20px;
+}
+
+.table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table td, .table th {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .table td b {
+            color: #007bff;
+            font-weight: normal;
+        }
+        .table tr:hover {
+            background-color: #ddd;
+        }
+.table {
+    margin-top: 1rem;
+}
+.table th {
+    background-color: #007bff;
+    color: #ffffff;
+}
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #11101d;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open {
+  width: 250px;
+}
+.sidebar .logo-details {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name {
+  opacity: 1;
+}
+.sidebar .logo-details #btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn {
+  text-align: right;
+}
+.sidebar i {
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list {
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip {
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip {
+  display: none;
+}
+.sidebar input {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
+}
+.sidebar.open input {
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #fff;
+}
+.sidebar.open .bx-search:hover {
+  background: #1d1b31;
+  color: #fff;
+}
+.sidebar .bx-search:hover {
+  background: #fff;
+  color: #11101d;
+}
+.sidebar li a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101d;
+}
+.sidebar li a:hover {
+  background: #fff;
+}
+.sidebar li a .links_name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #11101d;
+}
+.sidebar li i {
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile {
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile {
+  width: 250px;
+}
+.sidebar li .profile-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job {
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job {
+  font-size: 12px;
+}
+.sidebar .profile #log_out {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out {
+  width: 50px;
+  background: none;
+}
+.home-section {
+  position: relative;
+  background: #e4e9f7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .home-section {
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.home-section .text {
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
+}
+@media (max-width: 420px) {
+  .sidebar li .tooltip {
+    display: none;
+  }
+}
+
+body {
+        background-color: #f4f7fa;
+        font-family: 'Arial', sans-serif;
+    }
+    .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        max-width: 600px;
+        margin: 40px auto;
+    }
+    h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="email"], select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Makes sure the padding and border are included in the total width and height */
+    }
+    textarea {
+        resize: vertical; /* Allows vertical resize only */
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+    .form-control.error {
+        border-color: #e3342f; /* Red border color for errors */
+    }
+    .error-message {
+        color: #e3342f;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+
+</style>
+
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class='bx bx-stock'></i>
+          <div class="logo_name">Stock </div>
+          <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+          
+          <li>
+            <a href="{% url 'index' %}">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+          </li>
+        
+          <li>
+            <a href="{% url 'feedback_form' %}">
+              <i class='bx bx-chat'></i>
+              <span class="links_name">Feedback</span>
+            </a>
+            <span class="tooltip">Feedback</span>
+          </li>
+          <li>
+            <a href="{% url 'fundamental' %}">
+              <i class='bx bx-pie-chart-alt-2'></i>
+              <span class="links_name">Fundamental</span>
+            </a>
+            <span class="tooltip">Fundamental</span>
+          </li>
+          <li>
+            <a href="{% url 'predict_stock' %}">
+              <i class='bx bx-box'></i>
+              <span class="links_name">Predict Stock</span>
+            </a>
+            <span class="tooltip">Predict Stock</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-news'></i>
+              <span class="links_name">News</span>
+            </a>
+            <span class="tooltip">News</span>
+          </li>
+          <li>
+          
+            <li class="profile">
+                <div class="profile-details">
+                    <i class='bx bx-export'></i>
+                    <div class="name_job">
+                        <h3 style="color: #fff;">Logout</h3>
+                    </div>
+                </div>
+                <a href="{% url 'logout' %}">
+                    <i class='bx bx-log-out' id="log_out">  </i>
+                </a>
+            </li>
+        </ul>
+      </div>
+  <main id="main" class="main">
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Feedback Form</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            
+            <div class="form-group mb-3">
+                {{ form.satisfaction.label_tag }}
+                {{ form.satisfaction }}
+                {{ form.satisfaction.errors }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form.accuracy.label_tag }}
+                {{ form.accuracy }}
+                {{ form.accuracy.errors }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form.improvements.label_tag }}
+                {{ form.improvements }}
+                {{ form.improvements.errors }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form.additional_feedback.label_tag }}
+                {{ form.additional_feedback }}
+                {{ form.additional_feedback.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+        
+        
+        
+    
+          
+          
+    
+    {% block javascript %}
+
+    <script>
+      
+
+      
+      </script>
+      
+    <script>
+
+let sidebar = document.querySelector(".sidebar");
+let closeBtn = document.querySelector("#btn");
+let searchBtn = document.querySelector(".bx-search");
+
+closeBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  menuBtnChange();
+});
+
+searchBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  menuBtnChange();
+});
+
+function menuBtnChange() {
+  if (sidebar.classList.contains("open")) {
+    closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+}
+
+
+      /*
+          On submiting the form, send the POST ajax
+          request to server and after successfull submission
+          display the object.
+      */
+      document.addEventListener("DOMContentLoaded", () => {
+          // preventing from page reload and default actions
+          // serialize the data for sending the form data.
+          var ticker = '{{ticker}}'
+          var today = '{{today}}'
+          var week_ago = '{{ week_ago }}'
+
+          $.ajax({
+            type: 'GET',
+            url: "{% url 'loadstock' %}",
+            data: {"ticker": ticker,"start" : week_ago, "finish" : today},
+            success: function (response) {
+            var response = response['{{ticker}}']
+            var index = response['index']  
+            var open = response['open'] 
+            var high = response['high']  
+            var low = response['low'] 
+            var close = response['close'] 
+            console.log(index)
+           
+            var trace1 = {
+  
+  x: index, 
+  
+  close: close, 
+  
+  decreasing: {line: {color: '#f70d1'}}, 
+  
+  high: high, 
+  
+  increasing: {line: {color: '#12D900'}}, 
+  
+  line: {color: 'rgba(31,119,180,1)'}, 
+  
+  low: low, 
+  
+  open: open, 
+  
+  type: 'candlestick', 
+  xaxis: 'x', 
+  yaxis: 'y'
+};
+trace1['x'] = index;
+trace1['open'] = open;
+trace1['high'] = high;
+trace1['low'] = low;
+trace1['close'] = close;
+console.log(trace1['x'])
+
+var data = [trace1];
+
+var layout = {
+  dragmode: 'zoom', 
+  margin: {
+    r: 10, 
+    t: 25, 
+    b: 40, 
+    l: 60
+  }, 
+  showlegend: false, 
+  xaxis: {
+    autorange: true, 
+    domain: [0, 1], 
+    range: ['2022-09-05 12:00', '2022-10-30 12:00'], 
+    rangeslider: {range: ['2022-09-01 12:00', '2022-10-30 12:00']}, 
+    title: 'Date', 
+    type: 'date'
+  }, 
+  yaxis: {
+    autorange: true, 
+    domain: [0, 1], 
+    range: [114.609999778, 137.410004222], 
+    type: 'linear'
+  }
+};
+document.getElementById("tloading").style.display = "none"
+Plotly.newPlot('chart', data, layout);
+              
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+         
+      })
+  </script>
+    
+        
+        
+
+<script>
+  $(function() {
+    $('input[name="daterange"]').daterangepicker({
+      opens: 'left'
+    }, function(start, end, label) {
+      console.log("A new date selection was made: " + start.format('MM-DD-YYYY') + ' to ' + end.format('MM-DD-YYYY'));
+
+      var ticker = '{{ticker}}'
+      document.getElementById("chart").innerHTML = ""
+      document.getElementById("tloading").style.display = "inline"
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'loadstock' %}",
+            data: {"ticker": ticker,"start" : start.format('MM-DD-YYYY'), "finish" : end.format('MM-DD-YYYY')},
+            success: function (response) {
+            var response = response['{{ticker}}']
+            var index = response['index']  
+            var open = response['open'] 
+            var high = response['high']  
+            var low = response['low'] 
+            var close = response['close'] 
+            console.log(index)
+           
+            var trace1 = {
+  
+  x: index, 
+  
+  close: close, 
+  
+  decreasing: {line: {color: '#f70d1'}}, 
+  
+  high: high, 
+  
+  increasing: {line: {color: '#12D900'}}, 
+  
+  line: {color: 'rgba(31,119,180,1)'}, 
+  
+  low: low, 
+  
+  open: open, 
+  
+  type: 'candlestick', 
+  xaxis: 'x', 
+  yaxis: 'y'
+};
+trace1['x'] = index;
+trace1['open'] = open;
+trace1['high'] = high;
+trace1['low'] = low;
+trace1['close'] = close;
+console.log(trace1['x'])
+
+var data = [trace1];
+
+var layout = {
+  dragmode: 'zoom', 
+  margin: {
+    r: 10, 
+    t: 25, 
+    b: 40, 
+    l: 60
+  }, 
+  showlegend: false, 
+  xaxis: {
+    autorange: true, 
+    domain: [0, 1], 
+    range: ['2022-09-05 12:00', '2022-10-30 12:00'], 
+    rangeslider: {range: ['2022-09-01 12:00', '2022-10-30 12:00']}, 
+    title: 'Date', 
+    type: 'date'
+  }, 
+  yaxis: {
+    autorange: true, 
+    domain: [0, 1], 
+    range: [114.609999778, 137.410004222], 
+    type: 'linear'
+  }
+};
+document.getElementById("tloading").style.display = "none"
+Plotly.newPlot('chart', data, layout);
+              
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    });
+  });
+</script>
+    {% endblock javascript %}
+
+</body>
+
+</html>
